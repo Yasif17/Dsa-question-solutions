@@ -1,4 +1,5 @@
 /*
+Definition for Node
 class Node {
     int data;
     Node left, right;
@@ -14,20 +15,22 @@ class Node {
 class Solution {
     public boolean isBalanced(Node root) {
         // code here
-        return checkBal(root)!=-1;
+        return checkBalanced(root) !=-1;
     }
     
-    public int checkBal(Node root){
+    static int checkBalanced(Node root){
         if(root == null) return 0;
         
-        int left = checkBal(root.left);
-        int right = checkBal(root.right);
+        int leftHeight = checkBalanced(root.left);
+        if(leftHeight==-1) return -1;
         
-        if(left == -1 || right == -1) return -1;
+        int rightHeight = checkBalanced(root.right);
+        if(rightHeight==-1) return -1;
         
-        if(Math.abs(left-right)>1) return -1;
+        if(Math.abs(leftHeight-rightHeight)>1) return -1;
         
-        return Math.max(left,right)+1;
+        return Math.max(leftHeight,rightHeight)+1;
         
     }
+    
 }
